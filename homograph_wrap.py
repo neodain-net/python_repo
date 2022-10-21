@@ -16,8 +16,8 @@ def virtual_billboard(im_src, im_dst):
     return im_wrap + im_dst
 
 
-im_src = cv2.imread("images/capture/src00000.jpg")
-im_dst = cv2.imread("images/capture/dest00000.jpg")
+im_src = cv2.imread("../images/capture/src00000.jpg")
+im_dst = cv2.imread("../images/capture/dest00000.jpg")
 
 im_comp = virtual_billboard(im_src, im_dst)
 

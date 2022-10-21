@@ -28,7 +28,7 @@ def cartoonify(img, pretrained, size):
     return face2paint(model, img)
 
 
-img = read_square_image("images/my_photo_02.png", 256)
+img = read_square_image("../images/my_photo_02.png", 256)
 
 img = cartoonify(img, "paprika", 256)
 

@@ -7,7 +7,7 @@ def check_xy(event, x, y, flags, param):
         print(f"[{x}, {y}],", end="")
 
 
-img = cv.imread("images/capture/src00000.jpg")
+img = cv.imread("../images/capture/src00000.jpg")
 
 cv.namedWindow("Image")
 cv.setMouseCallback("Image", check_xy)

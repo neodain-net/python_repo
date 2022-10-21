@@ -17,39 +17,39 @@ def virtual_billboard(im_src, im_dst):
     return im_wrap + im_dst
 
 
-print(f'src file num  : {len(glob.glob("images/capture/src*.jpg"))}')
-print(f'dest file num : {len(glob.glob("images/capture/dest*.jpg"))}')
+print(f'src file num  : {len(glob.glob("../images/capture/src*.jpg"))}')
+print(f'dest file num : {len(glob.glob("../images/capture/dest*.jpg"))}')
 
 file_num = min(
-    len(glob.glob("images/capture/dest*.jpg")),
-    len(glob.glob("images/capture/dest*.jpg")),
+    len(glob.glob("../images/capture/dest*.jpg")),
+    len(glob.glob("../images/capture/dest*.jpg")),
 )
 print(f"selected file num : {file_num}")
 
 for i in range(file_num):
-    im_src = cv2.imread("images/capture/src" + str(i).zfill(5) + ".jpg")
-    im_dst = cv2.imread("images/capture/dest" + str(i).zfill(5) + ".jpg")
+    im_src = cv2.imread("../images/capture/src" + str(i).zfill(5) + ".jpg")
+    im_dst = cv2.imread("../images/capture/dest" + str(i).zfill(5) + ".jpg")
 
     im_comp = virtual_billboard(im_src, im_dst)
 
-    cv2.imwrite("images/capture/comp" + str(i).zfill(5) + ".jpg", im_comp)
+    cv2.imwrite("../images/capture/comp" + str(i).zfill(5) + ".jpg", im_comp)
 
 # 이미지 시퀀스를 동영상으로 묶기
-ffmpeg.input("images/capture/comp%5d.jpg").output(
-    "images/virtual_concert.mp4", start_number=0
+ffmpeg.input("../images/capture/comp%5d.jpg").output(
+    "../images/virtual_concert.mp4", start_number=0
 ).run(capture_stdout=True, capture_stderr=True)
 
 # audio 추출하기
-ffmpeg.input("images/bts_dynamite.mp4").output("images/bts_dynamite.wav").run()
+ffmpeg.input("../images/bts_dynamite.mp4").output("../images/bts_dynamite.wav").run()
 
 # video / audio 합치기
-video = ffmpeg.input("images/virtual_concert.mp4").video  # get only video channel
-audio = ffmpeg.input("images/bts_dynamite.wav").audio  # get only video channel
+video = ffmpeg.input("../images/virtual_concert.mp4").video  # get only video channel
+audio = ffmpeg.input("../images/bts_dynamite.wav").audio  # get only video channel
 
 output = ffmpeg.output(
     video,
     audio,
-    "images/virtual_concert_comp.mp4",
+    "../images/virtual_concert_comp.mp4",
     vcodec="copy",
     acodec="aac",
     strict="experimental",
